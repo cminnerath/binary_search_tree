@@ -211,8 +211,8 @@ class TreeTest < Minitest::Test
     assert_equal 4, testtree.root.data
     assert_equal 2, testtree.root.left.data
     testtree.delete(2)
-    assert_equal 3, testtree.root.data
-    assert_equal 1, testtree.root.left.data
+    assert_equal 6, testtree.root.data
+    assert_equal 3, testtree.root.left.data
   end
 
   def test_it_errors_when_attempting_to_delete_non_existant_node

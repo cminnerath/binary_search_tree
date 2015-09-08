@@ -74,13 +74,6 @@ class Tree
     end
   end                                  # => :include?
 
-  # def find_value
-  #   if current.nil?
-  #     return nil
-  #   elsif current.data == data
-  #     return data
-  # end
-
   def depth_of(data, current = @root, depth = 0)
     if current == nil
       depth = 'Error, data not present in tree'
@@ -127,10 +120,9 @@ class Tree
       @root = nil
       sorted.delete(data)
       count = sorted.count
-      sorted_first = sorted[0...count /2]
-      sorted_second = sorted[count /2..-1]
-      reverse = sorted_first.reverse
-      sorted = reverse.zip(sorted_second).flatten
+      sorted_first = sorted[0...count /2].reverse
+      sorted_second = sorted[count /2..-1].reverse
+      sorted = sorted_second.zip(sorted_first).flatten
       sorted = sorted.compact
       sorted.each do |data|
         insert(data)
@@ -138,5 +130,5 @@ class Tree
     else
     'Error, data not present in tree'
     end
-  end                                       # => :delete
+  end                                    # => :delete
 end                                         # => :delete
