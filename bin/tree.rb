@@ -121,7 +121,6 @@ class Tree
       sorted.delete(data)
       count = sorted.count
       sorted = rebalance(sorted)
-      require "pry";binding.pry
       sorted.each do |data|
         insert(data)
       end
