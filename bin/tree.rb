@@ -1,15 +1,15 @@
-require_relative 'node'                      # => true
+require_relative 'node'
 class Tree
-  attr_accessor :root, :data, :left, :right  # => nil
+  attr_accessor :root, :data, :left, :right
 
   def initialize
     @root = nil
     @sorted = []
-  end             # => :initialize
+  end
 
   def new_node(data, left = nil, right = nil)
     Node.new(data, left, right)
-  end                                          # => :new_node
+  end
 
   def insert(data)
     @current = @root
@@ -18,7 +18,7 @@ class Tree
     else
       insert_node(data)
     end
-  end                         # => :insert
+  end
 
   def insert_node(data)
     if data < @current.data
@@ -26,7 +26,7 @@ class Tree
     else
       insert_right(data)
     end
-  end                        # => :insert_node
+  end
 
   def insert_left(data)
     while !@current.left.nil?
@@ -42,7 +42,7 @@ class Tree
     elsif data > @current.data
       @current.right = Node.new(data)
     end
-  end                                  # => :insert_left
+  end
 
   def insert_right(data)
     while !@current.right.nil?
@@ -58,7 +58,7 @@ class Tree
     elsif data > @current.data
       @current.right = Node.new(data)
     end
-  end                                  # => :insert_right
+  end
 
   def include?(data, current = @root)
     if current.nil?
@@ -72,7 +72,7 @@ class Tree
       current = current.left
       include?(data, current)
     end
-  end                                  # => :include?
+  end
 
   def depth_of(data, current = @root, depth = 0)
     if current == nil
@@ -88,21 +88,21 @@ class Tree
     else
       depth
     end
-  end                                             # => :depth_of
+  end
 
   def maximum(current = @root)
     until current.right.nil?
       current = current.right
     end
     current.data
-  end                           # => :maximum
+  end
 
   def minimum(current = @root)
     until current.left.nil?
       current = current.left
     end
     current.data
-  end                           # => :minimum
+  end
 
   def sort(current = @root)
     return @sorted if current.nil?
@@ -111,7 +111,7 @@ class Tree
         @sorted << current.data
       end
     sort(current.right)
-  end                                    # => :sort
+  end
 
   def delete(data)
     current = @root
@@ -136,5 +136,5 @@ class Tree
     sorted_second = sorted[count /2..-1].reverse
     sorted = sorted_first.zip(sorted_second).flatten
     sorted = sorted.compact
-  end                           # => :delete
-end                                         # => :delete
+  end
+end
