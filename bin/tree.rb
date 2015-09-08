@@ -120,15 +120,22 @@ class Tree
       @root = nil
       sorted.delete(data)
       count = sorted.count
-      sorted_first = sorted[0...count /2].reverse
-      sorted_second = sorted[count /2..-1].reverse
-      sorted = sorted_second.zip(sorted_first).flatten
-      sorted = sorted.compact
+      sorted = rebalance(sorted)
+      require "pry";binding.pry
       sorted.each do |data|
         insert(data)
       end
     else
     'Error, data not present in tree'
     end
-  end                                    # => :delete
+  end
+
+  def rebalance(sorted)
+    sorted.delete(data)
+    count = sorted.count
+    sorted_first = sorted[0...count /2].reverse
+    sorted_second = sorted[count /2..-1].reverse
+    sorted = sorted_first.zip(sorted_second).flatten
+    sorted = sorted.compact
+  end                           # => :delete
 end                                         # => :delete
