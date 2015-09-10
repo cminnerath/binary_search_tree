@@ -104,19 +104,15 @@ class Tree
     current.data
   end
 
-  def sort(current = @root)
-    return @sorted if current.nil?
-    sort(current.left)
-      if !@sorted.include? current.data
-        @sorted << current.data
-      end
-    sort(current.right)
+  def sort
+    return [] unless @root
+    @root.sort([])
   end
 
   def delete(data)
     current = @root
     if include?(data)
-      sorted = sort(current)
+      sorted = sort
       @root = nil
       sorted.delete(data)
       count = sorted.count
@@ -132,8 +128,8 @@ class Tree
   def rebalance(sorted)
     sorted.delete(data)
     count = sorted.count
-    sorted_first = sorted[0...count /2].reverse
-    sorted_second = sorted[count /2..-1].reverse
+    sorted_first = sorted[0...(count / 2)].reverse
+    sorted_second = sorted[(count / 2)..-1].reverse
     sorted = sorted_first.zip(sorted_second).flatten
     sorted = sorted.compact
   end

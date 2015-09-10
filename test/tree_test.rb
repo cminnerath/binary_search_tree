@@ -126,37 +126,36 @@ class TreeTest < Minitest::Test
     assert_equal 'Error, data not present in tree', testtree.depth_of(0)
   end
 
-  def test_it_can_find_depth_of_branch_nodes
+
+
+  def tree_for(*values)
     testtree = Tree.new
-    testtree.insert(2)
-    testtree.insert(4)
-    testtree.insert(1)
-    testtree.insert(0)
-    testtree.insert(7)
-    testtree.insert(3)
-    testtree.insert(8)
-    assert_equal 0, testtree.depth_of(2)
-    assert_equal 1, testtree.depth_of(4)
-    assert_equal 1, testtree.depth_of(1)
-    assert_equal 2, testtree.depth_of(0)
-    assert_equal 2, testtree.depth_of(7)
-    assert_equal 2, testtree.depth_of(3)
-    assert_equal 3, testtree.depth_of(8)
-    assert_equal 'Error, data not present in tree', testtree.depth_of(17)
+    values.each { |value| testtree.insert value }
+    testtree
+  end
+
+  def assert_depths(tree, *depths)
+    depths.each do |data, depth|
+      assert_equal depth, tree.depth_of(data)
+    end
+  end
+
+  def test_it_can_find_depth_of_branch_nodes
+    tree = tree_for 'c', 'e', 'b', 'a', 'h', 'd', 'i'
+
+    assert_depths tree, ['c', 0],
+                        ['e', 1],
+                        ['b', 1],
+                        ['a', 2],
+                        ['h', 2],
+                        ['d', 2],
+                        ['i', 3]
+
+    assert_equal 'Error, data not present in tree', tree.depth_of('z')
   end
 
   def test_it_can_sort_fixnum_tree_into_an_array
-    testtree = Tree.new
-    testtree.insert(2)
-    testtree.insert(8)
-    testtree.insert(4)
-    testtree.insert(5)
-    testtree.insert(1)
-    testtree.insert(6)
-    testtree.insert(0)
-    testtree.insert(7)
-    testtree.insert(-1)
-    testtree.insert(3)
+    testtree = tree_for 2, 8, 4, 5, 1, 6, 0, 7, -1, 3
     assert_equal [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8], testtree.sort
   end
 
